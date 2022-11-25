@@ -3,6 +3,7 @@ import multer from "multer";
 import path from 'path';
 import fs from 'fs';
 
+
 const storage = multer.diskStorage({
   destination: (req,file,cb) => cb(null, 'uploads/'),
   filename: (req, file, cb) => {
@@ -10,7 +11,6 @@ const storage = multer.diskStorage({
   },
     
     });
-
     // const filetype = multer({
 
     //   fileFilter: (req, file, cb) => {
@@ -64,7 +64,23 @@ const userController = {
                res.status(201).json(userdata);
              
             },
-      
+            async download(req,res){
+              let records;
+              try{
+                    records= await User.findById( req.query.id );
+
+                   }
+              catch(error){
+                console.log(error)
+              }
+              //res.json(records)
+              console.log
+             res.download(records.resume)
+             // res.download(`./${records.resume}`);
+          
+            }
+
+           
                      
 }
 export default userController;

@@ -7,5 +7,9 @@ export const {
     APP_URL,
     DATABASE_URI,
     emailUser,
-    emailPassword
+    emailPassword,
+    SECRETKEY,
+    RAZORPAY_API_KEY,
+    RAZORPAY_API_SECRET
+
 } = process.env;

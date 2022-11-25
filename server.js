@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 // import cors from 'cors'
 var cors = require("cors");
+
 import { DATABASE_URI } from "./config";
 import routes from "./routes";
 const app = express();
@@ -16,6 +17,8 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+app.use('/uploads', express.static('uploads'));
 app.use("/api", routes);
 app.use(express.urlencoded({ extended: true }));
 

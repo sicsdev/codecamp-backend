@@ -4,7 +4,7 @@ import Lead from "../model/Lead";
 const leadController = {
     async feedbackdata(req,res,next)
     {
-            const  { userId, feedback, status, interest, call, screening, interview, test, selected } = req.body;
+            const  { userId, feedback, status, interest, call, screening, interview, test, selected} = req.body;
             let data;
             try{
                 data = await Lead.create({
@@ -16,7 +16,8 @@ const leadController = {
                     screening,
                     interview,
                     test,
-                    selected
+                    selected,
+                  
                 });
             }
             catch(err){

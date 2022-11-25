@@ -1,23 +1,38 @@
 import Stripe from 'stripe';
 import Signup from "../model/Signup";
+import User from "../model/User";
 
 
 const stripe = new Stripe('sk_test_51M1mJCSGtPJ6RVFDkOun5O88ZlsOxHjQmTJlyd4O2jDiGicO3wMHVajgimv092QqTayyLDVhzcCWpbL0BpV9etF2002od2lFCv')
 
 const subscriptionController = {
     async createNewSubs (req,res){
-      let {userId,priceId,paymentMethod}= req.body;
-      if(userId){
-            let userdata= await Signup.findById( userId );
+      let {priceId,paymentMethod}= req.body;
+      console.log(req.user)
+      // return
+      if(req.user.id){
+            let userdata= await Signup.findById( req.user.id );
          
             let name = userdata.name
             let email= userdata.email
             console.log(priceId)
-            let data=await createSubscription({name,email,priceId,paymentMethod})
 
-            console.log(data, "testing")
-            res.status(200).send(data)
-      }else{
+            try{
+              let data=await createSubscription({name,email,priceId,paymentMethod}) 
+                let edit = await Signup.findByIdAndUpdate({_id: req.user.id}, {
+                  paid: true
+                })
+                res.status(200).json({data: data, edit:edit});
+                return
+            }
+            catch(error){
+             console.log(error);
+             res.status(400).json({msg: "error occured"})
+             return
+            }
+    
+      }
+      else{
          res.status(500).json({ success: false});
        }
 

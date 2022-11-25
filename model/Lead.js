@@ -14,6 +14,7 @@ const leadSchema = new Schema({
     test: { type: String, required: true },
     selected: { type: String, required: true },
    
+   
 }, { timestamps:true });
 
 export default mongoose.model('Lead', leadSchema, 'leads');

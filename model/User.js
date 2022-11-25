@@ -10,6 +10,7 @@ const userSchema = new Schema({
     linkedin: { type: String, required: true },
     resume: {type: String, required: true},
     reference: {type: String},
+
     
    
 

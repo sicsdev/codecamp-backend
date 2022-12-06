@@ -4,28 +4,14 @@ import path from 'path';
 import fs from 'fs';
 
 
-const storage = multer.diskStorage({
-  destination: (req,file,cb) => cb(null, 'uploads/'),
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + "-" + file.originalname)
-  },
-    
+  const storage = multer.diskStorage({
+    destination: (req,file,cb) => cb(null, 'uploads/'),
+    filename: (req, file, cb) => {
+      cb(null, Date.now() + "-" + file.originalname)
+    },
+      
     });
-    // const filetype = multer({
 
-    //   fileFilter: (req, file, cb) => {
-    //         if (file.mimetype === "pdf" ) {
-    //           cb(null, true);
-    //         } else {
-    //           cb(null, false);
-    //           return cb(new Error('Only .png, .jpg and .jpeg format allowed!'));
-    //         }
-    //       }
-
-    // })
-  
-
-    // cb(null, Date.now() + "-" + file.originalname)
 const handleMultipartData = multer({ storage, limit: {filesize : 1000000 * 5 }}).single('resume');
 const userController = {
 
@@ -78,9 +64,6 @@ const userController = {
              res.download(records.resume)
              // res.download(`./${records.resume}`);
           
-            }
-
-           
-                     
+            }                    
 }
 export default userController;

@@ -5,6 +5,8 @@ import userController from '../Controller/userController';
 import leadController from '../Controller/leadController';
 import auth from '../middleware/auth';
 import razorpayController from '../Controller/razorpayController';
+import batchController from '../Controller/batchController';
+import studyController from '../Controller/studyController';
 const router = express.Router();
 
 
@@ -30,9 +32,17 @@ router.get('/download', userController.download);
 
 router.post('/feedback-data', leadController.feedbackdata); 
 router.get('/order', auth, razorpayController.order); 
+
 router.post('/paymentverification', razorpayController.paymentverification); 
-// router.post("/welcome", auth, (req, res) => {
-//     res.status(200).send("Welcome 🙌 ");
-//   });
+
+
+router.post('/add-batch', batchController.storebatch); 
+router.put('/assignbatch/:id' , batchController.assignbatch); 
+router.get('/getbatch', batchController.getbatch); 
+router.get('/get/', batchController.get); 
+router.post('/addassignments', studyController.addassignments); 
+
+
+
 
 export default router;

@@ -2,9 +2,10 @@ import express from "express";
 import mongoose from "mongoose";
 // import cors from 'cors'
 var cors = require("cors");
-
+const Razorpay = require("razorpay");
 import { DATABASE_URI } from "./config";
 import routes from "./routes";
+
 const app = express();
 // app.use(function (req, res, next) {
 //   let origin = req.headers.origin;

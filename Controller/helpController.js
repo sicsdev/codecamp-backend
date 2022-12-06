@@ -32,13 +32,13 @@ const helpController = {
             const salt = await bcrypt.genSalt();
             const passwordHash = await bcrypt.hash(password, salt);
               console.log(passwordHash);
-      const adduser = new Signup({
-        name,
-        email,
-        password: passwordHash,
-        phone,
-      });
-      const savedUser = await adduser.save();
+              const adduser = new Signup({
+                name,
+                email,
+                password: passwordHash,
+                phone,
+              });
+              const savedUser = await adduser.save();
       // res.status(201).json({ success: true, data: savedUser});
       const token = jwt.sign({email:savedUser.email, id: savedUser._id, role:savedUser.role}, SECRET_KEY)
       res.status(201).json({data: savedUser, authtoken: token})
@@ -234,7 +234,8 @@ const helpController = {
               
               });
 
-        
+         
+
           },
       
             async listusers(req, res) {

@@ -1,0 +1,70 @@
+import Batch from "../model/Batch";
+import Signup from "../model/Signup";
+
+
+
+const batchController = {
+    
+    async storebatch(req,res){
+        const  { name } = req.body;
+        let data;
+        try{
+            data = await Batch.create({
+                name,
+            });
+        }
+        catch(err){
+            return next(err);
+        }
+        res.status(201).json(data);
+  
+    },
+    async getbatch(req,res) {
+            const batchrecord = await Batch.find(
+            );
+            res.status(201).json(batchrecord);
+    },
+    async assignbatch(req,res) {
+        const  { batch } = req.body;
+       console.log("data",batch,req.params.id)
+        let records;
+        try{
+            records = await Signup.findOneAndUpdate({_id: req.params.id },{
+                $set:{batch: batch}
+         
+            },{new:true})
+            console.log(records)
+            res.status(200).json({
+                sucess:true,
+                data:records
+            })
+        }
+        catch(err){
+            console.log(err)
+            res.status(400).json({
+                sucess:false,
+                data:null,
+                
+            })
+        }
+
+    },
+    async get(req,res) {
+
+        const batch = await Batch.find();
+        if(!batch){
+            res.status(400).json({sucess:false })
+        }
+        let data=[]
+        for(let x of batch){
+        const user = await Signup.find({batch:x._id});
+        data.push({id:x._id,name:x.name,users:user})
+
+        }
+       res.status(201).json(data);
+},
+    
+    
+    
+}
+export default batchController;

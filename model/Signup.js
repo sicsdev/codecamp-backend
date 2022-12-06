@@ -11,6 +11,7 @@ const signupSchema = new Schema({
     token: {type: String, default: ''},
     paid: {type: Boolean, default: false},
     role: {type: Intl, default: 0},
+    batch: { type: Schema.Types.ObjectId, ref: 'Batch'  },
     image: {type: String, get: (image) => {
         return `${APP_URL}/${image}`;
      }},

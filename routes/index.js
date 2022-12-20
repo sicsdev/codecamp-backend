@@ -7,6 +7,8 @@ import auth from '../middleware/auth';
 import razorpayController from '../Controller/razorpayController';
 import batchController from '../Controller/batchController';
 import studyController from '../Controller/studyController';
+import submissionController from '../Controller/submissionController';
+import Submission from '../model/Submission';
 const router = express.Router();
 
 
@@ -46,9 +48,8 @@ router.post('/addassignments', studyController.addassignments);
 router.get('/get_assignments/:batch', studyController.get_assignments);
 
 router.get('/downloadassignment/:batch', studyController.download_assignment); 
-router.put('/updatedassignment/:id' , studyController.updatedassignment); 
+router.post('/updatedassignment/' ,auth, submissionController.updatedassignment); 
+router.get('/submissionurl/', submissionController.submissionurl); 
 
-
-router.get('/getsubmittedurl', studyController.getsubmittedurl); 
 
 export default router;

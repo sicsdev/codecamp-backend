@@ -10,6 +10,7 @@ const studySchema = new Schema({
     description: {type: String },
     assignments : {type: String},
     result: {type: String },
+    end_date: {type: Date},
     submission_url: {type: String},
     submitted: {type: Boolean, default: false},
     userid: { type: Schema.Types.ObjectId, ref: 'Signup'},

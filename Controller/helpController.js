@@ -67,7 +67,7 @@ const helpController = {
      // res.status(201).json({ success: true, data:user._id });
 
       const token = jwt.sign({email:user.email, id: user._id,role: user.role}, SECRET_KEY)
-      res.status(201).json({success: true,authtoken: token, role: user.role})
+      res.status(201).json({success: true,authtoken: token, user: user})
 
 
       
@@ -234,7 +234,8 @@ const helpController = {
               
               });
 
-        
+         
+
           },
       
             async listusers(req, res) {

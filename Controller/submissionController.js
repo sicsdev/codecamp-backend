@@ -9,13 +9,15 @@ const submissionController = {
 
 
     async updatedassignment(req,res) {
-        const {  submission_url,assignment_id } = req.body;
+        const {  submission_url ,assignment_id } = req.body;
      
-         console.log(req.body)
+         console.log(req.user.id)
+         
           let document;
         try{
            document = await Submission.create({
             submission_url,
+            user_id: req.user.id,
             assignment_id,
             submitted:true
          });
@@ -31,7 +33,7 @@ const submissionController = {
     },
 
 
-    async submissionurl(req,res) {
+    async submission(req,res) {
 
         const batch = await Submission.find();
         if(!batch){
@@ -43,7 +45,7 @@ const submissionController = {
         data.push({submitted:x.submitted,users:user,submission_url:x.submission_url})
         }
       res.status(201).json(data);
-    console.log(batch)
+      console.log(batch)
     },
   
 

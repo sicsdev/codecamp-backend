@@ -49,7 +49,7 @@ router.get('/get_assignments/:batch', studyController.get_assignments);
 
 router.get('/downloadassignment/:batch', studyController.download_assignment); 
 router.post('/updatedassignment/' ,auth, submissionController.updatedassignment); 
-router.get('/submissionurl/', submissionController.submissionurl); 
+router.get('/submission/', submissionController.submission); 
 
 
 export default router;

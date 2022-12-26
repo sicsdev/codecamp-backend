@@ -4,13 +4,17 @@ import { APP_URL } from "../config";
 
 
 const signupSchema = new Schema({
-    name: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-    phone: { type: Number, required: true },
-    token: {type: String, default: ''}
-   
-
-}, { timestamps:true });
+    name: { type: String,  },
+    email: { type: String,  unique: true },
+    password: { type: String  },
+    phone: { type: Number  },
+    token: {type: String, default: ''},
+    paid: {type: Boolean, default: false},
+    role: {type: Intl, default: 0},
+    batch: { type: Schema.Types.ObjectId, ref: 'Batch'  },
+    image: {type: String, get: (image) => {
+        return `${APP_URL}/${image}`;
+     }},
+}, { timestamps:true, toJSON: { getters: true } } );
 
 export default mongoose.model('Signup', signupSchema, 'signups');

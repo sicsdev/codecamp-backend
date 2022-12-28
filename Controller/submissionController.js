@@ -35,14 +35,15 @@ const submissionController = {
 
     async submission(req,res) {
 
-        const batch = await Submission.find();
+        const batch = await Submission.find({user_id:req.user.id});
         if(!batch){
-            res.status(400).json({sucess:false })
+            return res.status(400).json({sucess:false })
         }
         let data=[]
         for(let x of batch){
-        const user = await Signup.find({_id:x.user_id});
-        data.push({submitted:x.submitted,users:user,submission_url:x.submission_url})
+        // const user = await Signup.find({_id:x.user_id});
+        // data.push({submitted:x.submitted,users:user,submission_url:x.submission_url,assignment_id:x.assignment_id})
+        data.push(x.assignment_id)
         }
       res.status(201).json(data);
       console.log(batch)

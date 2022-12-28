@@ -1,7 +1,7 @@
-let User,multer,path,fs;_cf2‍.x([["default",()=>_cf2‍.o]]);_cf2‍.w("../model/User",[["default",["User"],function(v){User=v}]]);_cf2‍.w("multer",[["default",["multer"],function(v){multer=v}]]);_cf2‍.w("path",[["default",["path"],function(v){path=v}]]);_cf2‍.w("fs",[["default",["fs"],function(v){fs=v}]]);
-
-
-
+import User from "../model/User";
+import multer from "multer";
+import path from 'path';
+import fs from 'fs';
 
 
 const storage = multer.diskStorage({
@@ -27,14 +27,14 @@ const storage = multer.diskStorage({
 
     // cb(null, Date.now() + "-" + file.originalname)
 const handleMultipartData = multer({ storage, limit: {filesize : 1000000 * 5 }}).single('resume');
-const userController = {
+const applyController = {
 
     async apply(req, res) {
             handleMultipartData(req,res, async (err) => {
 
                 const { name, email, phone, linkedin, resume, reference } = req.body;
                 const filePath = req.file.path;
-                  _cf2‍.g.console.log(filePath)
+                  console.log(filePath)
                   let document;
                 try{
                    document = await User.create({
@@ -46,10 +46,10 @@ const userController = {
                     reference
 
                 });
-                      _cf2‍.g.console.log(document);
+                      console.log(document);
                   }
                   catch(err){
-                     _cf2‍.g.console.log(err)
+                     console.log(err)
                   }
                   res.status(201).json({
                       success:true,
@@ -71,10 +71,10 @@ const userController = {
 
                    }
               catch(error){
-                _cf2‍.g.console.log(error)
+                console.log(error)
               }
               //res.json(records)
-              _cf2‍.g.console.log
+              console.log
              res.download(records.resume)
              // res.download(`./${records.resume}`);
           
@@ -83,4 +83,4 @@ const userController = {
            
                      
 }
-_cf2‍.d(userController);
+export default applyController;

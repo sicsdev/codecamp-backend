@@ -1,7 +1,5 @@
 const jwt = require("jsonwebtoken");
-import helpController from "../Controller/helpController";
-import Signup from "../model/Signup";
-// const config = process.env;
+
 const SECRET_KEY= "MYSECRETKEY"
 
 const auth = async(req, res, next) => {

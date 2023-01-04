@@ -42,7 +42,7 @@ router.post('/add-batch', batchController.storebatch);
 router.put('/assignbatch/:id' , batchController.assignbatch); 
 router.get('/getbatch', batchController.getbatch); 
 router.get('/get/', batchController.get); 
-
+router.get('/getbtch/:id', batchController.getbtch); 
 
 router.post('/addassignments', studyController.addassignments); 
 router.get('/get_assignments/:batch', studyController.get_assignments);
@@ -50,6 +50,6 @@ router.get('/get_assignments/:batch', studyController.get_assignments);
 router.get('/downloadassignment/:batch', studyController.download_assignment); 
 router.post('/updatedassignment/' ,auth, submissionController.updatedassignment); 
 router.get('/submission/',auth, submissionController.submission); 
-
+router.get('/checksubmission/',auth, submissionController.checksubmission)
 
 export default router;

@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 
 const batchSchema = new Schema({
-    name: { type: String,  },
+    name: { type: String  },
   
 }, { timestamps:true } );
 

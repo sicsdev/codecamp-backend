@@ -23,6 +23,7 @@ const batchController = {
 
             console.log(batchrecord, "check")
     },
+
     async assignbatch(req,res) {
         const  { batch } = req.body;
        console.log("data",batch,req.params.id)
@@ -64,9 +65,17 @@ const batchController = {
     },
 
 
+    async getbtch(req,res) {
+        let records;
+        try{
+          records= await Signup.findById( req.params.id).populate({path:"batch",select:"name"});
+         }
+       catch(err){
+          res.status(500).json({ error: err.message });
+         }
+         res.status(201).json(records);
+        }
 
-    
-    
     
     
 }

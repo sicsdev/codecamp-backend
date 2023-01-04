@@ -9,7 +9,7 @@ const submissionController = {
 
 
     async updatedassignment(req,res) {
-        const {  submission_url ,assignment_id } = req.body;
+        const {  submission_url ,assignment_id,comments } = req.body;
      
          console.log(req.user.id)
          
@@ -19,7 +19,8 @@ const submissionController = {
             submission_url,
             user_id: req.user.id,
             assignment_id,
-            submitted:true
+            submitted:true,
+            comments
          });
           }
           catch(err){
@@ -48,6 +49,25 @@ const submissionController = {
       res.status(201).json(data);
       console.log(batch)
     },
+
+
+    async checksubmission(req,res) {
+
+        const batch = await Submission.find();
+        if(!batch){
+            return res.status(400).json({sucess:false })
+        }
+        let alldata=[]
+        for(let x of batch){
+        const userdata = await Signup.find({_id:x.user_id});
+        alldata.push({submitted:x.submitted,users:userdata,submission_url:x.submission_url,assignment_id:x.assignment_id})
+       
+        }
+      res.status(201).json(alldata);
+      console.log(batch)
+    },
+
+    
   
 
 }

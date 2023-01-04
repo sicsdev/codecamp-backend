@@ -240,7 +240,7 @@ const userController = {
       
             async listusers(req, res) {
               const userdata = await Signup.find( {role: 0} 
-              );
+              ).populate({path:"batch"});
               
                res.status(201).json(userdata);
              

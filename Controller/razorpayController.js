@@ -13,12 +13,11 @@ const razorpayController = {
             let userdata= await Signup.findById( req.user.id );   
             let name = userdata.name
             let email= userdata.email
-            let phone= userdata.phone
-
-            console.log(phone)
+        
+           
         try {
             const options = {
-            amount: 20000 * 100, // amount == Rs 10
+            amount: 20000 * 10, // amount == Rs 10
             currency: "INR",
             receipt: "receipt#1",
        
@@ -34,7 +33,7 @@ const razorpayController = {
             let edit = await Signup.findByIdAndUpdate({_id: req.user.id}, {
               paid: true
             })
-        return res.status(200).json ({data: order.id, value:order.amount, success: true, userdata:{name:name, email:email, phone:phone}});
+        return res.status(200).json ({data: order.id, value:order.amount, success: true, userdata:{name:name, email:email}});
         });
         } catch (err) {
         return res.status(500).json({
